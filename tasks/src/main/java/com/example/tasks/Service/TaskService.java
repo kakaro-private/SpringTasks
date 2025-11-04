@@ -1,0 +1,53 @@
+package com.example.tasks.Service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.example.tasks.Entity.TaskEntity;
+import com.example.tasks.Form.TaskInputForm;
+import com.example.tasks.Form.TaskListForm;
+import com.example.tasks.Repository.TaskRepository;
+
+@Service
+public class TaskService {
+
+  @Autowired
+  TaskRepository taskRepository;
+
+  //検索
+  @Transactional(readOnly = true)
+  public List<TaskEntity> search(TaskListForm form) {
+    List<TaskEntity> list = taskRepository.getTasks(form);
+    return list;
+  }
+
+  //タスクを追加
+  @Transactional
+  public void addTasks(TaskInputForm form) {
+    taskRepository.insertTasks(form);
+
+  }
+
+  //タスクの修正
+  @Transactional
+  public void updateTasks(TaskInputForm form) {
+    taskRepository.updateTasks(form);
+  }
+
+  //状態ラベルを｢完了へ｣
+  @Transactional
+  public void completeTasks(int id) {
+    taskRepository.completeTasks(id);
+  }
+
+  //削除
+  @Transactional
+  public void deleteTasks(int id) {
+    taskRepository.deleteTasks(id);
+
+  }
+
+}
