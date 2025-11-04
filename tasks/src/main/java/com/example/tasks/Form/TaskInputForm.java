@@ -2,12 +2,19 @@ package com.example.tasks.Form;
 
 import java.util.Date;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class TaskInputForm {
 
+  @NotBlank
   private String type;
+  @NotBlank
   private String taskName;
+  @NotBlank
   private String taskDescription;
+  @NotBlank
   private String priority;
+  @NotBlank
   private Date deadline;
 
   public String getType() {

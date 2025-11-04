@@ -19,7 +19,7 @@ public class TaskService {
 
   //検索
   @Transactional(readOnly = true)
-  public List<TaskEntity> search(TaskListForm form) {
+  public List<TaskEntity> searchTasks(TaskListForm form) {
     List<TaskEntity> list = taskRepository.getTasks(form);
     return list;
   }

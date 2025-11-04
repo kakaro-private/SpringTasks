@@ -1,11 +1,18 @@
 package com.example.tasks.Form;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class TaskListForm {
 
+  @NotBlank
   private String userName;
+  @NotBlank
   private String type;
+  @NotBlank
   private String taskName;
+  @NotBlank
   private String priority;
+  @NotBlank
   private boolean isCompleted;
 
   public String getUserName() {

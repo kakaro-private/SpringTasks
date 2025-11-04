@@ -10,18 +10,7 @@ public class TaskEntity {
    * 種別を定義
    */
   public enum Type {
-    Work("work"), Private("private"), Other("other");
-
-    private final String typeName;
-
-    Type(String typeName) {
-      this.typeName = typeName;
-    }
-
-    public String getTypeName() {
-      return this.typeName;
-    }
-
+    Work, Private, Other;
   }
 
   /*
@@ -29,27 +18,7 @@ public class TaskEntity {
    * 高、中、低の3段階
    */
   public enum Priority {
-    High("高"), Middle("中"), Low("低");
-
-    private final String lavel;
-
-    Priority(String lavel) {
-
-      this.lavel = lavel;
-    }
-
-    public String getLavel() {
-      return lavel;
-    }
-
-    public Priority fromLavel(String lavel) {
-      for (Priority priority : Priority.values()) {
-        if (priority.getLavel() == lavel) {
-          return priority;
-        }
-      }
-      throw new IllegalArgumentException("Unknown theme lavel: " + lavel);
-    }
+    High, Middle, Low;
 
   }
 
@@ -169,15 +138,6 @@ public class TaskEntity {
   public void setIsCompleted(boolean isCompleted) {
     this.isCompleted = isCompleted;
 
-  }
-
-  //デバッグ用
-  public String getLavel() {
-    return this.priority.getLavel();
-  }
-
-  public String getTypeName() {
-    return this.type.getTypeName();
   }
 
 }
