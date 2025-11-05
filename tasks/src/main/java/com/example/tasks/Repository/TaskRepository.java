@@ -12,12 +12,15 @@ import org.springframework.stereotype.Repository;
 import com.example.tasks.Entity.TaskEntity;
 import com.example.tasks.Form.TaskInputForm;
 import com.example.tasks.Form.TaskListForm;
+import com.example.tasks.Form.util.PageInfo;
 
 @Repository
 public class TaskRepository {
 
   @Autowired
   private final JdbcTemplate jdbc;
+
+  private PageInfo pageInfo;
 
   //DEBUG
   boolean dummy = false;
@@ -26,13 +29,18 @@ public class TaskRepository {
     this.jdbc = jdbc;
   }
 
-  //検索
+  /*
+   * 検索
+   */
   public List<TaskEntity> getTasks(TaskListForm form) {
 
+    pageInfo = form.getPageInfo();
     //全件数の取得
-    form.getPageInfo()
-        .setAllCount(jdbc.queryForObject("SELECT COUNT(*) FROM task", Integer.class));
+    pageInfo.setAllCount(jdbc.queryForObject("SELECT COUNT(*) FROM task", Integer.class));
+    //表示ページ数の計算
+    pageInfo.setPageNo(pageInfo.calcPages());
 
+    //sql生成
     StringBuilder str = new StringBuilder("SELECT "
         + " 'id',"
         + " 'type',"
@@ -55,7 +63,7 @@ public class TaskRepository {
     //クエリ実行
     result = jdbc.queryForList(sql);
 
-    //配列化
+    //コンバート
     List<TaskEntity> list = new ArrayList<>();
     for (Map<String, Object> Map : result) {
       TaskEntity entity = new TaskEntity();
@@ -66,6 +74,9 @@ public class TaskRepository {
     return list;
   }
 
+  /*
+   * 挿入
+   */
   public void insertTasks(TaskInputForm form) {
 
     String sql = "INSERT INTO task("
@@ -95,6 +106,9 @@ public class TaskRepository {
 
   }
 
+  /*
+   * 更新
+   */
   public void updateTasks(TaskInputForm form) {
 
     String sql = "UPDATE task SET"
@@ -119,6 +133,9 @@ public class TaskRepository {
     }
   }
 
+  /*
+   * 
+   */
   public void completeTasks(int id) {
 
     String sql = "UPDATE task SET"
@@ -134,6 +151,9 @@ public class TaskRepository {
 
   }
 
+  /*
+   * 
+   */
   public void deleteTasks(int id) {
 
     String sql = "DELETE FROM task"
@@ -148,7 +168,9 @@ public class TaskRepository {
 
   }
 
-  //MaptoEntityコンバータ
+  /*
+   * MaptoEntityコンバータ
+   */
   public TaskEntity MapToEntity(Map<String, Object> map) {
     TaskEntity entity = new TaskEntity();
 
@@ -164,42 +186,59 @@ public class TaskRepository {
     return entity;
   }
 
-  //Where句を生成
+  /*
+   * Where句を生成
+   */
   public String whereQueryBuild() {
 
     StringBuilder str = new StringBuilder("");
 
-    //TODO:IF条件
+    //TODO:loginUserのAuthを判別してSwitch
     //Auth別処理
     String n = "0";
-    String AuthFlag = "";
+    String auth = "";
     switch (n) {
     case "Debug":
-      break;
     case "Admin":
-      if (dummy) {
-        String authAdmin = "name = ?";
+      if (dummy) {//cmdによって判別
+        auth = "name = ?";
       }
       break;
     case "common":
-      String suthCommon = "name = ?";
+      auth = "name = ?";
       break;
     }
 
     //idCompleted=1or0のみ条件
+    String comp = "";
     if (dummy) {
-      String comp = " is_completed = 1";
-    } else {
-      String compNot = "is_completed = 0";
+      if (dummy) {
+        comp = " is_completed = 1";
+      } else {
+        comp = "is_completed = 0";
+      }
     }
 
     //Priority = ?条件
+    String pri = "";
+    String priority = "";
     if (dummy) {
-      String priHigh = "priority = 'High'";
-    } else if (dummy) {
-      String priMid = "priority = 'Middle'";
-    } else if (dummy) {
-      String priLow = "priority = 'Low'";
+      switch (pri) {
+      case "High":
+        priority = "priority = High";
+        break;
+      case "Middle":
+        priority = "priority = Middle";
+        break;
+      case "Low":
+        priority = "priority = Middle";
+        break;
+      }
+    }
+
+    if (!auth.isBlank() && !comp.isBlank() && !priority.isBlank()) {
+      str.append("WHERE");
+
     }
 
     return null;

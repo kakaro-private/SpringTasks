@@ -4,8 +4,17 @@ public class PageInfo {
 
   private int lineCount = 20;//表示件数、初期値20
   private int allCount;//全件数
-  private int pageCount;//現在ページ数
+  private int pageNo;//現在ページ数
   private int maxPage;//最大ページ数
+
+  public int calcPages() {
+    if (pageNo <= 0) {
+      pageNo = 1;
+    } else if (maxPage < pageNo) {
+      pageNo = maxPage;
+    }
+    return pageNo;
+  }
 
   //GetSet------------------------------------
 
@@ -27,12 +36,12 @@ public class PageInfo {
 
   }
 
-  public int getPageCount() {
-    return this.pageCount;
+  public int getPageNo() {
+    return this.pageNo;
   }
 
-  public void setPageCount(int pageCount) {
-    this.pageCount = pageCount;
+  public void setPageNo(int pageNo) {
+    this.pageNo = pageNo;
 
   }
 
