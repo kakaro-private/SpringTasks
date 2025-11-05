@@ -17,11 +17,6 @@ import com.example.tasks.Form.TaskListForm;
 public class TaskRepository {
 
   @Autowired
-  private TaskEntity taskEntity;
-  @Autowired
-  private TaskInputForm taskInputForm;
-  @Autowired
-  private TaskListForm taskListForm;
   private final JdbcTemplate jdbc;
 
   //DEBUG
@@ -34,7 +29,20 @@ public class TaskRepository {
   //検索
   public List<TaskEntity> getTasks(TaskListForm form) {
 
-    StringBuilder str = new StringBuilder("SELECT * FROM task");
+    //全件数の取得
+    form.getPageInfo()
+        .setAllCount(jdbc.queryForObject("SELECT COUNT(*) FROM task", Integer.class));
+
+    StringBuilder str = new StringBuilder("SELECT "
+        + " 'id',"
+        + " 'type',"
+        + " 'task_name',"
+        + " 'task_description',"
+        + " 'priority',"
+        + " 'deedline',"
+        + " 'is_completed'"
+        + " FROM task");
+
     String where = null;
 
     //Where句の生成
@@ -74,8 +82,12 @@ public class TaskRepository {
         + "?)";
 
     int n = 0;
-    n = jdbc.update(sql, form.getType(), form.getTaskName(), form.getTaskDescription(),
-        form.getPriority(), form.getDeadline());
+    n = jdbc.update(sql,
+        form.getType(),
+        form.getTaskName(),
+        form.getTaskDescription(),
+        form.getPriority(),
+        form.getDeadline());
 
     if (n != 1) {
 
@@ -94,8 +106,13 @@ public class TaskRepository {
         + "WHERE 'id' = ?";
 
     int n = 0;
-    n = jdbc.update(sql, form.getType(), form.getTaskName(), form.getTaskDescription(),
-        form.getPriority(), form.getDeadline(), "id");
+    n = jdbc.update(sql,
+        form.getType(),
+        form.getTaskName(),
+        form.getTaskDescription(),
+        form.getPriority(),
+        form.getDeadline(),
+        form.getId());
 
     if (n != 1) {
 

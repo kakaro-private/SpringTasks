@@ -7,6 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 public class TaskInputForm {
 
   @NotBlank
+  private int id;
+  @NotBlank
   private String type;
   @NotBlank
   private String taskName;
@@ -16,6 +18,15 @@ public class TaskInputForm {
   private String priority;
   @NotBlank
   private Date deadline;
+
+  //GetSet------------------------------------
+  public int getId() {
+    return this.id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 
   public String getType() {
     return this.type;

@@ -2,6 +2,8 @@ package com.example.tasks.Form;
 
 import jakarta.validation.constraints.NotBlank;
 
+import com.example.tasks.Form.util.PageInfo;
+
 public class TaskListForm {
 
   @NotBlank
@@ -14,7 +16,9 @@ public class TaskListForm {
   private String priority;
   @NotBlank
   private boolean isCompleted;
+  private PageInfo pageInfo;
 
+  //GetSet------------------------------------
   public String getUserName() {
     return this.userName;
   }
@@ -53,6 +57,14 @@ public class TaskListForm {
 
   public void setIsCompleted(boolean isCompleted) {
     this.isCompleted = isCompleted;
+  }
+
+  public PageInfo getPageInfo() {
+    return this.pageInfo;
+  }
+
+  public void setPageInfo(PageInfo pageInfo) {
+    this.pageInfo = pageInfo;
   }
 
 }

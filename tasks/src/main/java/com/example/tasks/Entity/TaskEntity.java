@@ -14,7 +14,7 @@ public class TaskEntity {
   }
 
   /*
-   * 優先度をラベルにして規定
+   * 優先度を定義
    * 高、中、低の3段階
    */
   public enum Priority {
@@ -27,17 +27,17 @@ public class TaskEntity {
   @NotBlank
   private String userName;
   @NotBlank
-  private Type type = Type.Other;//デフォルト値
+  private Type type = Type.Other;//==デフォルト値
   @NotBlank
   private String taskName;
   @NotBlank
   private String taskDescription;
   @NotBlank
-  private Priority priority = Priority.Low;//デフォルト値
+  private Priority priority = Priority.Low;//==デフォルト値
   @NotBlank
   private Date deadline;
   @NotBlank
-  private boolean isCompleted = false;//デフォルト値
+  private boolean isCompleted = false;//==デフォルト値
 
   //GetSet------------------------------------
   public int getId() {
