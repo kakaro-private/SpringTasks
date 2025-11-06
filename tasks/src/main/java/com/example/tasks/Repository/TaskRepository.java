@@ -54,8 +54,11 @@ public class TaskRepository {
 
     //Where句の生成
     String where = "";
-    where = whereQueryBuild().toString();
-    str.append(where);
+    where = whereQueryBuild();
+    if (!where.equals("")) {
+      where.toString();
+      str.append(where);
+    }
 
     //クエリ実行
     String sql = str.toString();
@@ -179,7 +182,7 @@ public class TaskRepository {
   public TaskEntity MapToEntity(Map<String, Object> map) {
     TaskEntity entity = new TaskEntity();
 
-    entity.setId((Integer) map.get("id"));
+    entity.setId(Integer.parseInt((String) map.get("id")));
     entity.setUserName(map.get("user_nama").toString());
     entity.setTypeByTypeName(map.get("type").toString());
     entity.setTaskName(map.get("task_name").toString());
@@ -249,7 +252,9 @@ public class TaskRepository {
 
     }
 
-    return null;
+    var result = str.toString();
+
+    return result;
   }
 
 }

@@ -1,23 +1,46 @@
 package com.example.tasks.Controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.tasks.Entity.TaskEntity;
+import com.example.tasks.Form.TaskListForm;
+import com.example.tasks.Service.TaskService;
 
 @Controller
 @RequestMapping("/task")
 public class TaskController {
 
+  @Autowired
+  TaskService taskService;
+
   @GetMapping("/list")
-  public String getList() {
+  public String getList(Model model) {
+
+    TaskListForm form = new TaskListForm();
+    List<TaskEntity> list = taskService.searchTasks(form);
+
+    model.addAttribute("taskListForm", form);
+    model.addAttribute("taskList", list);
 
     return "task_list";
 
   }
 
   @PostMapping("/list")
-  public String postList() {
+  public String postList(@ModelAttribute TaskListForm form, Model model) {
+
+    List<TaskEntity> list = taskService.searchTasks(form);
+
+    model.addAttribute("taskListForm", form);
+    model.addAttribute("taskList", list);
 
     return "task_list";
 
