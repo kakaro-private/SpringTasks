@@ -16,7 +16,7 @@ public class TaskListForm {
   private String priority;
   @NotBlank
   private boolean isCompleted;
-  private PageInfo pageInfo;
+  private PageInfo pageInfo = new PageInfo();
 
   //GetSet------------------------------------
   public String getUserName() {

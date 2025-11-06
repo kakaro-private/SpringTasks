@@ -7,11 +7,32 @@
 <script src='main.js'></script>
 </head>
 <body>
-  <h1>タスク一覧リスト</h1>
+  <h1 class="display-1">タスク一覧リスト</h1>
 
   <form th:action="@{/task/new}" method="post">
-    <button type="submit">新規</button>
+    <button class="btn btn-primary" type="submit">新規</button>
   </form>
+
+  <table class="table">
+    <tr>
+      <td>タイプ</td>
+      <td>タスク名</td>
+      <td>説明</td>
+      <td>優先度</td>
+      <td>期日</td>
+      <td>チェック</td>
+    </tr>
+    <tr th:each="list : ${taskList}">
+      <td>${list.type}</td>
+      <td>${list.taskName}</td>
+      <td>${list.taskDescription}</td>
+      <td>${list.priority}</td>
+      <td>${list.deadline}</td>
+      <td>
+        <input type="checkbox">
+      </td>
+    </tr>
+  </table>
 
 </body>
 </html>
