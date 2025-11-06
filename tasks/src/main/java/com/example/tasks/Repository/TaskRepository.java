@@ -43,6 +43,7 @@ public class TaskRepository {
     //sql生成
     StringBuilder str = new StringBuilder("SELECT "
         + " 'id',"
+        + " 'user_name',"
         + " 'type',"
         + " 'task_name',"
         + " 'task_description',"
@@ -51,16 +52,14 @@ public class TaskRepository {
         + " 'is_completed'"
         + " FROM task");
 
-    String where = null;
-
     //Where句の生成
+    String where = "";
     where = whereQueryBuild().toString();
     str.append(where);
 
+    //クエリ実行
     String sql = str.toString();
     List<Map<String, Object>> result = new ArrayList<>();
-
-    //クエリ実行
     result = jdbc.queryForList(sql);
 
     //コンバート
@@ -80,28 +79,34 @@ public class TaskRepository {
   public void insertTasks(TaskInputForm form) {
 
     String sql = "INSERT INTO task("
+        + "user_name"
         + "type,"
-        + "taskName,"
-        + "taskDescription,"
+        + "task_name,"
+        + "task_description,"
         + "priority,"
-        + "deadline)"
+        + "deadline,"
+        + "is_completed)"
         + "VALUES ("
+        + "?,"
+        + "?,"
         + "?,"
         + "?,"
         + "?,"
         + "?,"
         + "?)";
 
-    int n = 0;
-    n = jdbc.update(sql,
+    int low = 0;
+    low = jdbc.update(sql,
+        "userName",
         form.getType(),
         form.getTaskName(),
         form.getTaskDescription(),
         form.getPriority(),
-        form.getDeadline());
+        form.getDeadline(),
+        false);
 
-    if (n != 1) {
-
+    if (low != 1) {
+      //TODO:エラー処理
     }
 
   }
@@ -119,8 +124,8 @@ public class TaskRepository {
         + "deadline = ?"
         + "WHERE 'id' = ?";
 
-    int n = 0;
-    n = jdbc.update(sql,
+    int low = 0;
+    low = jdbc.update(sql,
         form.getType(),
         form.getTaskName(),
         form.getTaskDescription(),
@@ -128,13 +133,13 @@ public class TaskRepository {
         form.getDeadline(),
         form.getId());
 
-    if (n != 1) {
-
+    if (low != 1) {
+      //TODO:エラー処理
     }
   }
 
   /*
-   * 
+   * 完了
    */
   public void completeTasks(int id) {
 
@@ -142,28 +147,28 @@ public class TaskRepository {
         + "is_ccompleted = 1"
         + "WHERE 'id' = ?";
 
-    int n = 0;
-    n = jdbc.update(sql, id);
+    int low = 0;
+    low = jdbc.update(sql, id);
 
-    if (n != 1) {
-
+    if (low != 1) {
+      //TODO:エラー処理
     }
 
   }
 
   /*
-   * 
+   * 削除
    */
   public void deleteTasks(int id) {
 
     String sql = "DELETE FROM task"
         + "WHERE 'id' = ?";
 
-    int n = 0;
-    n = jdbc.update(sql, id);
+    int low = 0;
+    low = jdbc.update(sql, id);
 
-    if (n != 1) {
-
+    if (low != 1) {
+      //TODO:エラー処理
     }
 
   }
@@ -195,27 +200,30 @@ public class TaskRepository {
 
     //TODO:loginUserのAuthを判別してSwitch
     //Auth別処理
-    String n = "0";
+    String n = "";
     String auth = "";
     switch (n) {
     case "Debug":
     case "Admin":
       if (dummy) {//cmdによって判別
-        auth = "name = ?";
+        auth = "name = " + "userName";
       }
       break;
     case "common":
-      auth = "name = ?";
+      auth = "name = " + "userName";
       break;
     }
 
     //idCompleted=1or0のみ条件
     String comp = "";
     if (dummy) {
-      if (dummy) {
-        comp = " is_completed = 1";
-      } else {
-        comp = "is_completed = 0";
+      switch (comp) {
+      case "true":
+        comp = "is_completed = true";
+        break;
+      case "false":
+        comp = "is_completed = false";
+        break;
       }
     }
 
