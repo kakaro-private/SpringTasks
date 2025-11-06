@@ -30,7 +30,6 @@ public class TaskEntity {
   private Type type = Type.Other;//==デフォルト値
   @NotBlank
   private String taskName;
-  @NotBlank
   private String taskDescription;
   @NotBlank
   private Priority priority = Priority.Low;//==デフォルト値
