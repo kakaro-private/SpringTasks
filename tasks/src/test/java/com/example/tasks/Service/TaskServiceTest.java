@@ -112,11 +112,11 @@ public class TaskServiceTest {
 
     @Test
     void addTasks() {
-      doNothing().when(taskRepository).insertTasks(inputForm);
+      doNothing().when(taskRepository).insertTasks(inputForm, null);
 
       taskService.addTasks(inputForm);
 
-      verify(taskRepository, times(1)).insertTasks(inputForm);
+      verify(taskRepository, times(1)).insertTasks(inputForm, null);
 
     }
 

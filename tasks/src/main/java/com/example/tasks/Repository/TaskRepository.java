@@ -76,7 +76,7 @@ public class TaskRepository {
   /*
    * 挿入
    */
-  public void insertTasks(TaskInputForm form) {
+  public void insertTasks(TaskInputForm form, String userName) {
 
     String sql = "INSERT INTO task("
         + "user_name"
@@ -97,7 +97,7 @@ public class TaskRepository {
 
     int low = 0;
     low = jdbc.update(sql,
-        "userName",
+        userName,
         form.getType(),
         form.getTaskName(),
         form.getTaskDescription(),

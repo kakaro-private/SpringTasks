@@ -3,63 +3,65 @@ package com.example.tasks.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller("/task")
+@Controller
+@RequestMapping("/task")
 public class TaskController {
 
   @GetMapping("/list")
   public String getList() {
 
-    return null;
+    return "task_list";
 
   }
 
   @PostMapping("/list")
   public String postList() {
 
-    return null;
+    return "task_list";
 
   }
 
-  @PostMapping("/list/new")
+  @PostMapping("/new")
   public String postListNew() {
 
-    return null;
+    return "task_register";
 
   }
 
-  @PostMapping("/list/new/confirm")
+  @PostMapping("/new/confirm")
   public String postListNewConfirm() {
 
-    return null;
+    return "task_confirm";
 
   }
 
-  @PostMapping("/list/new/complete")
+  @PostMapping("/new/complete")
   public String postListNewComplete() {
 
-    return null;
+    return "task_list";
 
   }
 
-  @PostMapping("/list/update")
+  @PostMapping("/update")
   public String postListUpdate() {
 
-    return null;
+    return "task_register";
 
   }
 
-  @PostMapping("/list/update/confirm")
+  @PostMapping("/update/confirm")
   public String postListUpdateConfirm() {
 
-    return null;
+    return "task_confirm";
 
   }
 
-  @PostMapping("/list/update/complete")
+  @PostMapping("/update/complete")
   public String postListUpdateComplete() {
 
-    return null;
+    return "task_list";
 
   }
 

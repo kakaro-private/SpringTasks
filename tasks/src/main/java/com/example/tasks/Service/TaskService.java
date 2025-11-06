@@ -17,21 +17,40 @@ public class TaskService {
   @Autowired
   TaskRepository taskRepository;
 
-  //検索
+  /*
+   * 検索
+   */
   @Transactional(readOnly = true)
   public List<TaskEntity> searchTasks(TaskListForm form) {
     List<TaskEntity> list = taskRepository.getTasks(form);
     return list;
   }
 
-  //タスクを追加
+  /*
+   * タスク追加
+   * for common user
+   */
   @Transactional
   public void addTasks(TaskInputForm form) {
-    taskRepository.insertTasks(form);
+    String userName = "loginUserName";//TODO:修正
+    taskRepository.insertTasks(form, userName);
 
   }
 
-  //タスクの修正
+  /*
+   * タスク追加
+   * for admin user
+   */
+  @Transactional
+  public void addTasksAdmin(TaskInputForm form) {
+    String userName = "taskUserName";//TODO:修正
+    taskRepository.insertTasks(form, userName);
+
+  }
+
+  /*
+   * タスクの修正
+   */
   @Transactional
   public void updateTasks(TaskInputForm form) {
     taskRepository.updateTasks(form);
