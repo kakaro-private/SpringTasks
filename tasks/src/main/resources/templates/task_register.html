@@ -7,11 +7,21 @@
 <script src='main.js'></script>
 </head>
 <body>
-<h1>登録</h1>
+  <h1>登録</h1>
 
-<form th:action="@{/task/new/confirm}" method="post">
-<button type="submit">確認</button>
-</form>
+  <form th:action="@{/task/new/confirm}" method="post">
+    <input type="text" th:value="${taskInputForm.type}">
+    <br>
+    <input type="text" th:value="${taskInputForm.taskName}">
+    <br>
+    <input type="text" th:value="${taskInputForm.taskDescription}">
+    <br>
+    <input type="text" th:value="${taskInputForm.priority}">
+    <br>
+    <input type="text" th:value="${taskInputForm.deadline}">
+    <br>
+    <button type="submit">確認</button>
+  </form>
 
 </body>
 </html>

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.tasks.Entity.TaskEntity;
+import com.example.tasks.Form.TaskInputForm;
 import com.example.tasks.Form.TaskListForm;
 import com.example.tasks.Service.TaskService;
 
@@ -47,7 +48,9 @@ public class TaskController {
   }
 
   @PostMapping("/new")
-  public String postListNew() {
+  public String postListNew(@ModelAttribute TaskInputForm form, Model model) {
+
+    model.addAttribute("taskInputForm", form);
 
     return "task_register";
 
