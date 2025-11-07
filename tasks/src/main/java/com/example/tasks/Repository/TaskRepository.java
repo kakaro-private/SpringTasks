@@ -42,14 +42,14 @@ public class TaskRepository {
 
     //sql生成
     StringBuilder str = new StringBuilder("SELECT "
-        + " 'id',"
-        + " 'user_name',"
-        + " 'type',"
-        + " 'task_name',"
-        + " 'task_description',"
-        + " 'priority',"
-        + " 'deedline',"
-        + " 'is_completed'"
+        + " id,"
+        + " user_name,"
+        + " type,"
+        + " task_name,"
+        + " task_description,"
+        + " priority,"
+        + " deadline,"
+        + " is_completed"
         + " FROM task");
 
     //Where句の生成
@@ -182,11 +182,15 @@ public class TaskRepository {
   public TaskEntity MapToEntity(Map<String, Object> map) {
     TaskEntity entity = new TaskEntity();
 
-    entity.setId(Integer.parseInt((String) map.get("id")));
-    entity.setUserName(map.get("user_nama").toString());
+    //DEBUG
+    //    System.out.println(map.get("id").toString());
+    //    System.out.println(map.get("user_name").toString());
+
+    entity.setId(Integer.valueOf(map.get("id").toString()));
+    entity.setUserName(map.get("user_name").toString());
     entity.setTypeByTypeName(map.get("type").toString());
     entity.setTaskName(map.get("task_name").toString());
-    entity.setTaskDescription(map.get("description").toString());
+    entity.setTaskDescription(map.get("task_description").toString());
     entity.setPriorityByLavel(map.get("priority").toString());
     entity.setDeadline((Date) map.get("deadline"));
     entity.setIsCompleted(((boolean) map.get("is_completed")));

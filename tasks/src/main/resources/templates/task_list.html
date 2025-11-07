@@ -13,26 +13,37 @@
     <button class="btn btn-primary" type="submit">新規</button>
   </form>
 
-  <table class="table">
-    <tr>
-      <td>タイプ</td>
-      <td>タスク名</td>
-      <td>説明</td>
-      <td>優先度</td>
-      <td>期日</td>
-      <td>チェック</td>
-    </tr>
-    <tr th:each="list : ${taskList}">
-      <td>${list.type}</td>
-      <td>${list.taskName}</td>
-      <td>${list.taskDescription}</td>
-      <td>${list.priority}</td>
-      <td>${list.deadline}</td>
-      <td>
-        <input type="checkbox">
-      </td>
-    </tr>
-  </table>
+  <div class="container my-5">
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-primary text-white fw-bold">ユーザー一覧</div>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <thead class="table-light">
+            <tr>
+              <td>タイプ</td>
+              <td>タスク名</td>
+              <td>説明</td>
+              <td>優先度</td>
+              <td>期日</td>
+              <td>チェック</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="list : ${taskList}">
+              <td>[[${list.type}]]</td>
+              <td>[[${list.taskName}]]</td>
+              <td>[[${list.taskDescription}]]</td>
+              <td>[[${list.priority}]]</td>
+              <td>[[${list.deadline}]]</td>
+              <td>
+                <input type="checkbox">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>
