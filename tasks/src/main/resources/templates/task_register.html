@@ -7,7 +7,11 @@
 <script src='main.js'></script>
 </head>
 <body>
-  <h1>登録</h1>
+  <div th:switch="${actionCmd}">
+    <h1 th:case="new">新規タスク登録</h1>
+    <h1 th:case="update">タスク情報更新</h1>
+  </div>
+
 
   <form th:action="@{/task/new/confirm}" method="post">
     <input type="text" th:value="${taskInputForm.type}">

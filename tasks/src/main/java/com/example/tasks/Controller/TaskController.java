@@ -82,8 +82,16 @@ public class TaskController {
 
   }
 
-  @PostMapping("/new/complete")
-  public String postListNewComplete() {
+  @PostMapping("/new/excecute")
+  public String postListNewComplete(@ModelAttribute TaskInputForm form, Model model) {
+
+    taskService.addTasks(form);
+
+    TaskListForm listForm = new TaskListForm();
+    List<TaskEntity> list = taskService.searchTasks(listForm);
+
+    model.addAttribute("taskListForm", listForm);
+    model.addAttribute("taskList", list);
 
     return "task_list";
 
@@ -102,37 +110,79 @@ public class TaskController {
   }
 
   @PostMapping("/update/confirm")
-  public String postListUpdateConfirm() {
+  public String postListUpdateConfirm(@Valid @ModelAttribute TaskInputForm form, BindingResult bindingResult,
+      Model model) {
+
+    if (bindingResult.hasErrors()) {
+
+      model.addAttribute("taskInputForm", form);
+      model.addAttribute("actionCmd", "update");
+
+      return "task_register";
+
+    }
+
+    model.addAttribute("taskInputForm", form);
+    model.addAttribute("actionCmd", "update");
 
     return "task_confirm";
 
   }
 
-  @PostMapping("/update/complete")
-  public String postListUpdateComplete() {
+  @PostMapping("/update/execuete")
+  public String postListUpdateComplete(@ModelAttribute TaskInputForm form, Model model) {
+
+    taskService.addTasks(form);
+
+    TaskListForm listForm = new TaskListForm();
+    List<TaskEntity> list = taskService.searchTasks(listForm);
+
+    model.addAttribute("taskListForm", listForm);
+    model.addAttribute("taskList", list);
 
     return "task_list";
 
   }
 
-  @PostMapping("/list/complete")
-  public String postListCompleted() {
+  @PostMapping("/list/completed")
+  public String postListIsCompleted(@ModelAttribute int id, Model model) {
 
-    return null;
+    taskService.completeTasks(id);
+
+    TaskListForm listForm = new TaskListForm();
+    List<TaskEntity> list = taskService.searchTasks(listForm);
+
+    model.addAttribute("taskListForm", listForm);
+    model.addAttribute("taskList", list);
+
+    return "task_list";
 
   }
 
-  @PostMapping("/list/delete")
-  public String postListDelete() {
+  @PostMapping("/delete")
+  public String postListDelete(@ModelAttribute int id, Model model) {
 
-    return null;
+    TaskInputForm form = taskService.searchTasksSingle(id);
+
+    model.addAttribute("taskInputForm", form);
+    model.addAttribute("actionCmd", "delete");
+
+    return "task_confirm";
 
   }
 
-  @PostMapping("/list/delete/complete")
-  public String postListDeleteComplete() {
+  @PostMapping("/delete/execute")
+  public String postListDeleteComplete(@ModelAttribute int id, Model model) {
 
-    return null;
+    taskService.deleteTasks(id);
+
+    TaskListForm listForm = new TaskListForm();
+    List<TaskEntity> list = taskService.searchTasks(listForm);
+
+    model.addAttribute("taskListForm", listForm);
+    model.addAttribute("taskList", list);
+
+    return "task_list";
 
   }
 
