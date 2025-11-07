@@ -27,6 +27,25 @@ public class TaskService {
   }
 
   /*
+   * 一件検索
+   */
+  @Transactional(readOnly = true)
+  public TaskInputForm searchTasksSingle(int id) {
+
+    TaskInputForm form = new TaskInputForm();
+    TaskEntity entity = taskRepository.getTasksSingle(id);
+
+    form.setId(entity.getId());
+    form.setType(entity.getType().toString());
+    form.setTaskName(entity.getTaskName());
+    form.setTaskDescription(entity.getTaskDescription());
+    form.setPriority(entity.getPriority().toString());
+    form.setDeadline(entity.getDeadline());
+
+    return form;
+  }
+
+  /*
    * タスク追加
    * for common user
    */

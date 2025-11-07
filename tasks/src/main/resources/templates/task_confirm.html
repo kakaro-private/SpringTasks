@@ -7,17 +7,17 @@
 <script src='main.js'></script>
 </head>
 <body>
-<h1>確認</h1>
+  <h1>確認</h1>
 
-<form th:action="@{/task/new/complete}" th:object="${taskInputForm}" method="post">
-<div>[[*{type}]]]</div>
-<div>[[*{taskName}]]]</div>
-<div>[[*{taskDescription}]]]</div>
-<div>[[*{priority}]]]</div>
-<div>[[*{deadline}]]]</div>
+  <form th:action="@{/task/new/complete}" th:object="${taskInputForm}" method="post">
+    <div>[[*{type}]]]</div>
+    <div>[[*{taskName}]]]</div>
+    <div>[[*{taskDescription}]]]</div>
+    <div>[[*{priority}]]]</div>
+    <div>[[*{deadline}]]]</div>
 
-<button type="submit">完了</button>
-</form>
+    <button type="submit">完了</button>
+  </form>
 
 </body>
 </html>

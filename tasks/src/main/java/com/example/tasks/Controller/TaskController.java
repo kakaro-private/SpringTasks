@@ -2,9 +2,12 @@ package com.example.tasks.Controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,16 +51,32 @@ public class TaskController {
   }
 
   @PostMapping("/new")
-  public String postListNew(@ModelAttribute TaskInputForm form, Model model) {
+  public String postListNew(Model model) {
+
+    TaskInputForm form = new TaskInputForm();
 
     model.addAttribute("taskInputForm", form);
+    model.addAttribute("actionCmd", "new");
 
     return "task_register";
 
   }
 
   @PostMapping("/new/confirm")
-  public String postListNewConfirm() {
+  public String postListNewConfirm(@Valid @ModelAttribute TaskInputForm form, BindingResult bindingResult,
+      Model model) {
+
+    if (bindingResult.hasErrors()) {
+
+      model.addAttribute("taskInputForm", form);
+      model.addAttribute("actionCmd", "new");
+
+      return "task_register";
+
+    }
+
+    model.addAttribute("taskInputForm", form);
+    model.addAttribute("actionCmd", "new");
 
     return "task_confirm";
 
@@ -71,7 +90,12 @@ public class TaskController {
   }
 
   @PostMapping("/update")
-  public String postListUpdate() {
+  public String postListUpdate(@ModelAttribute int id, Model model) {
+
+    TaskInputForm form = taskService.searchTasksSingle(id);
+
+    model.addAttribute("taskInputForm", form);
+    model.addAttribute("actionCmd", "update");
 
     return "task_register";
 

@@ -2,6 +2,7 @@ package com.example.tasks.Repository;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -74,6 +75,34 @@ public class TaskRepository {
     }
 
     return list;
+  }
+
+  /*
+   *一件を検索
+   */
+  public TaskEntity getTasksSingle(int id) {
+
+    String sql = new String("SELECT "
+        + " id,"
+        + " user_name,"
+        + " type,"
+        + " task_name,"
+        + " task_description,"
+        + " priority,"
+        + " deadline,"
+        + " is_completed"
+        + " FROM task"
+        + " WHERE id = ? ");
+
+    //クエリ実行
+    Map<String, Object> result = new HashMap<>();
+    result = jdbc.queryForMap(sql, id);
+
+    //コンバート
+    TaskEntity entity = new TaskEntity();
+    entity = MapToEntity(result);
+
+    return entity;
   }
 
   /*
