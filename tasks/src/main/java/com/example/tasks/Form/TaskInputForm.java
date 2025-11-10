@@ -1,12 +1,11 @@
 package com.example.tasks.Form;
 
-import java.util.Date;
-
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class TaskInputForm {
 
-  @NotBlank
+  @NotNull
   private int id;
   @NotBlank
   private String type;
@@ -16,8 +15,8 @@ public class TaskInputForm {
   private String taskDescription;
   @NotBlank
   private String priority;
-  @NotBlank
-  private Date deadline;
+  @NotNull
+  private String deadline;
 
   //GetSet------------------------------------
   public int getId() {
@@ -60,11 +59,11 @@ public class TaskInputForm {
     this.priority = priority;
   }
 
-  public Date getDeadline() {
+  public String getDeadline() {
     return this.deadline;
   }
 
-  public void setDeadline(Date deadline) {
+  public void setDeadline(String deadline) {
     this.deadline = deadline;
   }
 

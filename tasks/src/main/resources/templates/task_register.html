@@ -13,19 +13,60 @@
   </div>
 
 
-  <form th:action="@{/task/new/confirm}" method="post">
-    <input type="text" th:value="${taskInputForm.type}">
-    <br>
-    <input type="text" th:value="${taskInputForm.taskName}">
-    <br>
-    <input type="text" th:value="${taskInputForm.taskDescription}">
-    <br>
-    <input type="text" th:value="${taskInputForm.priority}">
-    <br>
-    <input type="text" th:value="${taskInputForm.deadline}">
-    <br>
+  <form th:object="${taskInputForm}" th:action="@{/task/{actionCmd}/confirm (actionCmd=${actionCmd})}" method="post">
+    <div class="container my-5">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-primary text-white fw-bold">ユーザー一覧</div>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <tbody>
+              <tr>
+                <td>
+                  <input th:type="hidden" th:field="${taskInputForm.id}">
+                </td>
+              </tr>
+              <tr>
+                <td>種類</td>
+                <td>
+                  <input type="text" th:field="*{type}">
+                  <span style="color: red;" th:if="${#fields.errors('type')}" th:errors="*{type}"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>名称</td>
+                <td>
+                  <input type="text" th:field="*{taskName}">
+                  <span style="color: red;" th:if="${#fields.errors('taskName')}" th:errors="*{taskName}"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>説明</td>
+                <td>
+                  <input type="text" th:field="*{taskDescription}">
+                  <span style="color: red;" th:if="${#fields.errors('taskDescription')}" th:errors="*{taskDescription}"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>優先度</td>
+                <td>
+                  <input type="text" th:field=*{priority}>
+                  <span style="color: red;" th:if="${#fields.errors('priority')}" th:errors="*{priority}"></span>
+                </td>
+              </tr>
+              <tr>
+                <td>期日</td>
+                <td>
+                  <input type="date" th:field="*{deadline}">
+                  <span style="color: red;" th:if="${#fields.errors('deadline')}" th:errors="*{deadline}"></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
     <button type="submit">確認</button>
   </form>
-
 </body>
 </html>

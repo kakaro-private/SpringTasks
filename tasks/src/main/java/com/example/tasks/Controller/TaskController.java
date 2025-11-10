@@ -83,7 +83,7 @@ public class TaskController {
 
   }
 
-  @PostMapping("/new/excecute")
+  @PostMapping("/new/execute")
   public String postListNewComplete(@ModelAttribute TaskInputForm form, Model model) {
 
     taskService.addTasks(form);
@@ -101,8 +101,7 @@ public class TaskController {
   @PostMapping("/update")
   public String postListUpdate(@RequestParam int id, Model model) {
 
-    int idtemp = 1;
-    TaskInputForm form = taskService.searchTasksSingle(idtemp);
+    TaskInputForm form = taskService.searchTasksSingle(id);
 
     model.addAttribute("taskInputForm", form);
     model.addAttribute("actionCmd", "update");
@@ -131,7 +130,7 @@ public class TaskController {
 
   }
 
-  @PostMapping("/update/execuete")
+  @PostMapping("/update/execute")
   public String postListUpdateComplete(@ModelAttribute TaskInputForm form, Model model) {
 
     taskService.addTasks(form);

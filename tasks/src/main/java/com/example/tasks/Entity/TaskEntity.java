@@ -1,6 +1,6 @@
 package com.example.tasks.Entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -34,7 +34,7 @@ public class TaskEntity {
   @NotBlank
   private Priority priority = Priority.Low;//==デフォルト値
   @NotBlank
-  private Date deadline;
+  private LocalDate deadline;
   @NotBlank
   private boolean isCompleted = false;//==デフォルト値
 
@@ -122,11 +122,11 @@ public class TaskEntity {
 
   }
 
-  public Date getDeadline() {
+  public LocalDate getDeadline() {
     return this.deadline;
   }
 
-  public void setDeadline(Date deadline) {
+  public void setDeadline(LocalDate deadline) {
     this.deadline = deadline;
   }
 

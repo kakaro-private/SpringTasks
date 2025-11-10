@@ -1,7 +1,7 @@
 package com.example.tasks.Repository;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,7 +111,7 @@ public class TaskRepository {
   public void insertTasks(TaskInputForm form, String userName) {
 
     String sql = "INSERT INTO task("
-        + "user_name"
+        + "user_name,"
         + "type,"
         + "task_name,"
         + "task_description,"
@@ -221,7 +221,8 @@ public class TaskRepository {
     entity.setTaskName(map.get("task_name").toString());
     entity.setTaskDescription(map.get("task_description").toString());
     entity.setPriorityByLavel(map.get("priority").toString());
-    entity.setDeadline((Date) map.get("deadline"));
+    Date sqlDate = (Date) map.get("deadline");
+    entity.setDeadline(sqlDate.toLocalDate());
     entity.setIsCompleted(((boolean) map.get("is_completed")));
 
     return entity;

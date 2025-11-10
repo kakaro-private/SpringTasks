@@ -3,7 +3,7 @@ package com.example.tasks.Service;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +43,7 @@ public class TaskServiceTest {
     high.setTaskName("highTask");
     high.setTaskDescription("this is highTask");
     high.setPriorityByLavel("High");
-    high.setDeadline(Date.valueOf("2025-01-01"));
+    high.setDeadline(LocalDate.parse("2025-01-01"));
     high.setIsCompleted(false);
 
     list.add(high);
@@ -54,7 +54,7 @@ public class TaskServiceTest {
     middle.setTaskName("middleTask");
     middle.setTaskDescription("this is middleTask");
     middle.setPriorityByLavel("Middle");
-    middle.setDeadline(Date.valueOf("2025-02-02"));
+    middle.setDeadline(LocalDate.parse("2025-02-02"));
     middle.setIsCompleted(true);
 
     list.add(middle);
@@ -65,7 +65,7 @@ public class TaskServiceTest {
     low.setTaskName("lowTask");
     low.setTaskDescription("this is lowTask");
     low.setPriorityByLavel("Low");
-    low.setDeadline(Date.valueOf("2025-03-03"));
+    low.setDeadline(LocalDate.parse("2025-03-03"));
     low.setIsCompleted(false);
 
     list.add(low);
@@ -83,7 +83,7 @@ public class TaskServiceTest {
     inputForm.setTaskName("newTasks");
     inputForm.setTaskDescription("this is newTask");
     inputForm.setPriority("Middle");
-    inputForm.setDeadline(Date.valueOf("2025-04-04"));
+    inputForm.setDeadline(LocalDate.parse("2025-04-04"));
 
     id = 0;
 
