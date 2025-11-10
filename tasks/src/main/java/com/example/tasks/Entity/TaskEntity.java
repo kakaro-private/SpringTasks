@@ -2,8 +2,6 @@ package com.example.tasks.Entity;
 
 import java.time.LocalDate;
 
-import jakarta.validation.constraints.NotBlank;
-
 public class TaskEntity {
 
   /*
@@ -22,20 +20,13 @@ public class TaskEntity {
 
   }
 
-  @NotBlank
   private int id;
-  @NotBlank
   private String userName;
-  @NotBlank
   private Type type = Type.Other;//==デフォルト値
-  @NotBlank
   private String taskName;
   private String taskDescription;
-  @NotBlank
   private Priority priority = Priority.Low;//==デフォルト値
-  @NotBlank
   private LocalDate deadline;
-  @NotBlank
   private boolean isCompleted = false;//==デフォルト値
 
   //GetSet------------------------------------
