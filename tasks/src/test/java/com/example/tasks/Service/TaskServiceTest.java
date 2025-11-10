@@ -83,7 +83,7 @@ public class TaskServiceTest {
     inputForm.setTaskName("newTasks");
     inputForm.setTaskDescription("this is newTask");
     inputForm.setPriority("Middle");
-    inputForm.setDeadline(LocalDate.parse("2025-04-04"));
+    inputForm.setDeadline("2025-04-04");
 
     id = 0;
 
