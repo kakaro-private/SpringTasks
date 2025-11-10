@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.tasks.Entity.TaskEntity;
 import com.example.tasks.Form.TaskInputForm;
@@ -98,9 +99,10 @@ public class TaskController {
   }
 
   @PostMapping("/update")
-  public String postListUpdate(@ModelAttribute int id, Model model) {
+  public String postListUpdate(@RequestParam int id, Model model) {
 
-    TaskInputForm form = taskService.searchTasksSingle(id);
+    int idtemp = 1;
+    TaskInputForm form = taskService.searchTasksSingle(idtemp);
 
     model.addAttribute("taskInputForm", form);
     model.addAttribute("actionCmd", "update");
