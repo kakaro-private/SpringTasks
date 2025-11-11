@@ -221,8 +221,7 @@ public class TaskRepository {
     entity.setTaskName(map.get("task_name").toString());
     entity.setTaskDescription(map.get("task_description").toString());
     entity.setPriorityByLavel(map.get("priority").toString());
-    Date sqlDate = (Date) map.get("deadline");
-    entity.setDeadline(sqlDate.toLocalDate());
+    entity.setDeadline(((Date) map.get("deadline")).toLocalDate());
     entity.setIsCompleted(((boolean) map.get("is_completed")));
 
     return entity;

@@ -134,7 +134,7 @@ public class TaskController {
   @PostMapping("/update/execute")
   public String postListUpdateComplete(@ModelAttribute TaskInputForm form, Model model) {
 
-    taskService.addTasks(form);
+    taskService.updateTasks(form);
 
     TaskListForm listForm = new TaskListForm();
     List<TaskEntity> list = taskService.searchTasks(listForm);
