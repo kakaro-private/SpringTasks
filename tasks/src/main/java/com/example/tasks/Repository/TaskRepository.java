@@ -148,13 +148,13 @@ public class TaskRepository {
    */
   public void updateTasks(TaskInputForm form) {
 
-    String sql = "UPDATE task SET"
-        + "type = ?,"
-        + "taskName = ?,"
-        + "taskDescription = ?,"
-        + "priority = ?,"
-        + "deadline = ?"
-        + "WHERE 'id' = ?";
+    String sql = "UPDATE spring_tasks.task SET "
+        + " type = ?,"
+        + " task_name = ?,"
+        + " task_description = ?,"
+        + " priority = ?,"
+        + " deadline = ?"
+        + " WHERE id = ?";
 
     int low = 0;
     low = jdbc.update(sql,
