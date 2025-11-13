@@ -1,0 +1,93 @@
+前提
+　SpringBoot＋ThymeReaf＋MySQL＋Maven(JUnit)で構成
+
+基本設計
+　＜画面＞
+　・一覧表示
+　・タスク新規追加
+　・タスク編集
+　・ログイン
+　
+　＜MUST機能＞
+　・全件表示
+　・特定の優先度のみ表示
+　・名称(キーワード)をあいまい検索で表示
+　・完了のみ、未完のみで表示
+　・優先度、完・未完ソート
+　・完了済タスクの削除
+　・期日の近いタスク、期日超過のタスクのハイライト
+　
+　＜WANT機能＞
+　・一覧ページから名称の即時変更
+　・初期データ取得の設定保持(完了は非表示など)
+　・タスク種別ごとにページ分け
+　・期日の近い＆超過のものを自動で優先度繰り上げ
+　・優先度が高い順＆期日が近い順で5件までを表示
+　
+　＜エラー対策＞
+　・登録、変更途中にページ離脱する際の警告
+　・ページバック、リロード時の警告
+　・入力値のバリデーションチェック
+　・
+　
+詳細設計
+　＜DB/Validation＞
+　キャメルケースで統一
+　TABLE user
+　・id INT AUTO_INCREMENT PRIMARY KEY NOT NULL
+　・name VARCHAR(20) NOT NULL
+　　同一名称は不可
+　・pass VARCHAR(20)
+　・auth VARCHAR(8) NOT NULL
+　　enumで指定
+　
+　TABLE task
+　・id INT AUTO_INCREMENT PRIMARY KEY
+　・user_name VARCHAR(20)
+　　同一名称は不可
+　・type VARCHAR(20)
+　　enumで指定
+　・task_name VARCHAR(30)
+　　同一名称は不可
+　・description VARCHAR(300)
+　・priority VARCHAR(10)
+　　enumで指定
+　・deadline DATE
+　・isCompleted TINYINT
+　　BackではBoolean
+　
+　<Front>
+　一覧ページ
+　・ログイン情報の表示
+　・表示件数
+　・表示件数移動
+　・名称キーワード検索
+　・チェックボックスで｢完了は非表示｣
+　・カラムごとにソート
+　・ログアウトボタン
+　
+　・登録、編集
+　エラーログ表示
+　
+　・
+　
+　<Back>
+　Repository
+　・全件取得
+　　
+　・Insert
+　・Update
+　・Delete
+　・Where句生成
+　　1
+　　Auth＝common -> WHEREでUserName分岐
+　　Auth＝Admin -> menuよりモード選択、個人モードと全件取得モード
+　　Auth＝Debug -> Nomalな全件取得
+　　2
+　　isCompleted=0or1のみ表示
+　　3
+　　Priority＝？のみ表示
+　　4
+　　
+　　
+
