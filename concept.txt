@@ -41,13 +41,13 @@
 　・auth VARCHAR(8) NOT NULL
 　　enumで指定
 　
-　TABLE task
+　TABLE task_info
 　・id INT AUTO_INCREMENT PRIMARY KEY
 　・user_name VARCHAR(20)
 　　同一名称は不可
 　・type VARCHAR(20)
 　　enumで指定
-　・task_name VARCHAR(30)
+　・task_name VARCHAR(30) UNIQUE
 　　同一名称は不可
 　・description VARCHAR(300)
 　・priority VARCHAR(10)
@@ -55,6 +55,22 @@
 　・deadline DATE
 　・isCompleted TINYINT
 　　BackではBoolean
+　
+　TABLE task_name
+　・id INT AUTO_INCREMENT PRIMARY KEY
+　・user_name VARCHAR(20)
+　　同一名称は不可
+　・type VARCHAR(20)
+　　enumで指定
+　・task_name VARCHAR(30) UNIQUE
+　　同一名称は不可
+　・description VARCHAR(300)
+　・priority VARCHAR(10)
+　　enumで指定
+　・deadline DATE
+　・isCompleted TINYINT
+　　BackではBoolean
+　・version timestamp
 　
 　<Front>
 　一覧ページ
@@ -76,8 +92,11 @@
 　・全件取得
 　　
 　・Insert
+　　同時に(task_name)Tableを作成
 　・Update
+　　同時に(task_name)TableにInsert、行数チェックして古いDataを削除
 　・Delete
+　　同時に(task_name)Tableを削除
 　・Where句生成
 　　1
 　　Auth＝common -> WHEREでUserName分岐
