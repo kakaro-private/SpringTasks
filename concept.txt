@@ -40,35 +40,34 @@
 　　同一名称は不可
 　・pass VARCHAR(20)
 　・auth VARCHAR(8) NOT NULL
+　　enumで指定
 　・insert_date timestamp
 　・update_date timestamp
-　　enumで指定
 　
 　TABLE task_info
-　・id INT AUTO_INCREMENT PRIMARY KEY
+　・id BIGINT AUTO_INCREMENT PRIMARY KEY
 　・user_name VARCHAR(20)
 　　同一名称は不可、外部キー｢user.name｣
 　・type VARCHAR(20)
 　　enumで指定
-　・task_name VARCHAR(30) UNIQUE
+　・task_name VARCHAR(255) UNIQUE
+　・priority VARCHAR(10)
+　　enumで指定
+　・due_date DATE
 　・insert_date timestamp
+　・update_date timestamp
+　・isCompleted TINYINT(1)
+　　BackではBoolean
 　・is_delete TINYINT(1)
+　　BackではBoolean
 　
 　TABLE task_name
 　・id INT PRIMARY KEY
 　　外部キー｢task_info.id｣
-　・user_name VARCHAR(20)
-　　同一名称は不可
-　・type VARCHAR(20)
-　　enumで指定
 　・task_name VARCHAR(30) UNIQUE
 　　同一名称は不可
 　・description VARCHAR(300)
-　・priority VARCHAR(10)
-　　enumで指定
-　・deadline DATE
-　・isCompleted TINYINT(1)
-　　BackではBoolean
+　・status VARCHAR(50) DEFAULT 'TODO'
 　・update_date timestamp
 　
 　<Front>
