@@ -28,36 +28,35 @@
 　・登録、変更途中にページ離脱する際の警告
 　・ページバック、リロード時の警告
 　・入力値のバリデーションチェック
-　・
+　・排他処理の実装
 　
 詳細設計
 　＜DB/Validation＞
 　キャメルケースで統一
+　
 　TABLE user
-　・id INT AUTO_INCREMENT PRIMARY KEY NOT NULL
+　・login_id VARCHAR(10) PRIMARY KEY
 　・name VARCHAR(20) NOT NULL
 　　同一名称は不可
 　・pass VARCHAR(20)
 　・auth VARCHAR(8) NOT NULL
+　・insert_date timestamp
+　・update_date timestamp
 　　enumで指定
 　
 　TABLE task_info
 　・id INT AUTO_INCREMENT PRIMARY KEY
 　・user_name VARCHAR(20)
-　　同一名称は不可
+　　同一名称は不可、外部キー｢user.name｣
 　・type VARCHAR(20)
 　　enumで指定
 　・task_name VARCHAR(30) UNIQUE
-　　同一名称は不可
-　・description VARCHAR(300)
-　・priority VARCHAR(10)
-　　enumで指定
-　・deadline DATE
-　・isCompleted TINYINT
-　　BackではBoolean
+　・insert_date timestamp
+　・is_delete TINYINT(1)
 　
 　TABLE task_name
-　・id INT AUTO_INCREMENT PRIMARY KEY
+　・id INT PRIMARY KEY
+　　外部キー｢task_info.id｣
 　・user_name VARCHAR(20)
 　　同一名称は不可
 　・type VARCHAR(20)
@@ -68,9 +67,9 @@
 　・priority VARCHAR(10)
 　　enumで指定
 　・deadline DATE
-　・isCompleted TINYINT
+　・isCompleted TINYINT(1)
 　　BackではBoolean
-　・version timestamp
+　・update_date timestamp
 　
 　<Front>
 　一覧ページ
