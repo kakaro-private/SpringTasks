@@ -40,7 +40,7 @@ public class TaskService {
     form.setTaskName(entity.getTaskName());
     form.setTaskDescription(entity.getTaskDescription());
     form.setPriority(entity.getPriority().toString());
-    form.setDeadline(entity.getDeadline().toString());
+    form.setDueDate(entity.getDueDate().toString());
 
     return form;
   }

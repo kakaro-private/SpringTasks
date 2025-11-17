@@ -1,6 +1,7 @@
 package com.example.tasks.Entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class TaskEntity {
 
@@ -20,34 +21,42 @@ public class TaskEntity {
 
   }
 
+  public enum Status {
+    TODO, Finish
+  }
+
   private int id;
-  private String userName;
+  private String userID;
   private Type type = Type.Other;//==デフォルト値
   private String taskName;
   private String taskDescription;
   private Priority priority = Priority.Low;//==デフォルト値
-  private LocalDate deadline;
+  private LocalDate dueDate;
   private boolean isCompleted = false;//==デフォルト値
+  private boolean isDeleted = false;//==デフォルト値
+  private LocalDateTime insertAt;
+  private LocalDateTime updatedAt;
 
   //GetSet------------------------------------
+
   public int getId() {
-    return this.id;
+    return id;
   }
 
   public void setId(int id) {
     this.id = id;
   }
 
-  public String getUserName() {
-    return this.userName;
+  public String getUserID() {
+    return userID;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setUserID(String userID) {
+    this.userID = userID;
   }
 
   public Type getType() {
-    return this.type;
+    return type;
   }
 
   public void setType(Type type) {
@@ -72,7 +81,7 @@ public class TaskEntity {
   }
 
   public String getTaskName() {
-    return this.taskName;
+    return taskName;
   }
 
   public void setTaskName(String taskName) {
@@ -80,7 +89,7 @@ public class TaskEntity {
   }
 
   public String getTaskDescription() {
-    return this.taskDescription;
+    return taskDescription;
   }
 
   public void setTaskDescription(String taskDescription) {
@@ -88,11 +97,10 @@ public class TaskEntity {
   }
 
   public Priority getPriority() {
-    return this.priority;
+    return priority;
   }
 
   public void setPriority(Priority priority) {
-
     this.priority = priority;
   }
 
@@ -113,21 +121,44 @@ public class TaskEntity {
 
   }
 
-  public LocalDate getDeadline() {
-    return this.deadline;
+  public LocalDate getDueDate() {
+    return dueDate;
   }
 
-  public void setDeadline(LocalDate deadline) {
-    this.deadline = deadline;
+  public void setDueDate(LocalDate dueDate) {
+    this.dueDate = dueDate;
   }
 
   public boolean getIsCompleted() {
-    return this.isCompleted;
+    return isCompleted;
   }
 
   public void setIsCompleted(boolean isCompleted) {
     this.isCompleted = isCompleted;
+  }
 
+  public boolean getIsDeleted() {
+    return isDeleted;
+  }
+
+  public void setIsDeleted(boolean isDeleted) {
+    this.isDeleted = isDeleted;
+  }
+
+  public LocalDateTime getInsertAt() {
+    return insertAt;
+  }
+
+  public void setInsertAt(LocalDateTime insertAt) {
+    this.insertAt = insertAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
   }
 
 }

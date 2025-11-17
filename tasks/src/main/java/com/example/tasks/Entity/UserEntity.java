@@ -1,6 +1,6 @@
 package com.example.tasks.Entity;
 
-import jakarta.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 public class UserEntity {
 
@@ -22,25 +22,25 @@ public class UserEntity {
     }
   }
 
-  @NotBlank
-  private int id;
-  @NotBlank
+  private String loginId;
   private String userName;
   private String pass;
-  @NotBlank
   private Auth auth = Auth.common;//デフォルト値
+  private LocalDateTime insertDate;
+  private LocalDateTime updateDate;
 
   //GetSet------------------------------------
-  public int getId() {
-    return this.id;
+
+  public String getLoginId() {
+    return loginId;
   }
 
-  public void setId(int id) {
-    this.id = id;
+  public void setLoginId(String loginId) {
+    this.loginId = loginId;
   }
 
   public String getUserName() {
-    return this.userName;
+    return userName;
   }
 
   public void setUserName(String userName) {
@@ -48,7 +48,7 @@ public class UserEntity {
   }
 
   public String getPass() {
-    return this.pass;
+    return pass;
   }
 
   public void setPass(String pass) {
@@ -56,7 +56,7 @@ public class UserEntity {
   }
 
   public Auth getAuth() {
-    return this.auth;
+    return auth;
   }
 
   public void setAuth(Auth auth) {
@@ -78,6 +78,22 @@ public class UserEntity {
       break;
     }
 
+  }
+
+  public LocalDateTime getInsertDate() {
+    return insertDate;
+  }
+
+  public void setInsertDate(LocalDateTime insertDate) {
+    this.insertDate = insertDate;
+  }
+
+  public LocalDateTime getUpdateDate() {
+    return updateDate;
+  }
+
+  public void setUpdateDate(LocalDateTime updateDate) {
+    this.updateDate = updateDate;
   }
 
   //デバッグ用

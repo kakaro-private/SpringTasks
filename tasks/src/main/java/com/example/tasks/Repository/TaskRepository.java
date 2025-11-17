@@ -1,6 +1,7 @@
 package com.example.tasks.Repository;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -134,7 +135,7 @@ public class TaskRepository {
         form.getTaskName(),
         form.getTaskDescription(),
         form.getPriority(),
-        form.getDeadline(),
+        form.getDueDate(),
         false);
 
     if (low != 1) {
@@ -162,7 +163,7 @@ public class TaskRepository {
         form.getTaskName(),
         form.getTaskDescription(),
         form.getPriority(),
-        form.getDeadline(),
+        form.getDueDate(),
         form.getId());
 
     if (low != 1) {
@@ -216,13 +217,16 @@ public class TaskRepository {
     //    System.out.println(map.get("user_name").toString());
 
     entity.setId(Integer.valueOf(map.get("id").toString()));
-    entity.setUserName(map.get("user_name").toString());
-    entity.setTypeByTypeName(map.get("type").toString());
+    entity.setUserID(map.get("user_id").toString());
     entity.setTaskName(map.get("task_name").toString());
-    entity.setTaskDescription(map.get("task_description").toString());
+    entity.setTypeByTypeName(map.get("type").toString());
     entity.setPriorityByLavel(map.get("priority").toString());
-    entity.setDeadline(((Date) map.get("deadline")).toLocalDate());
+    entity.setDueDate(((Date) map.get("due_date")).toLocalDate());
+    entity.setInsertAt(((Timestamp) map.get("insert_at")).toLocalDateTime());
+    entity.setUpdatedAt(((Timestamp) map.get("updated_at")).toLocalDateTime());
     entity.setIsCompleted(((boolean) map.get("is_completed")));
+    entity.setIsDeleted(((boolean) map.get("is_deleted")));
+    entity.setTaskDescription(map.get("task_description").toString());
 
     return entity;
   }
