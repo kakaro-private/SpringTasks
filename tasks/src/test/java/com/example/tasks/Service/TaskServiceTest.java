@@ -38,34 +38,34 @@ public class TaskServiceTest {
     TaskEntity low = new TaskEntity();
 
     high.setId(1);
-    high.setUserName("first");
+    high.setUserID("first");
     high.setTypeByTypeName("Work");
     high.setTaskName("highTask");
     high.setTaskDescription("this is highTask");
     high.setPriorityByLavel("High");
-    high.setDeadline(LocalDate.parse("2025-01-01"));
+    high.setDueDate(LocalDate.parse("2025-01-01"));
     high.setIsCompleted(false);
 
     list.add(high);
 
     middle.setId(2);
-    middle.setUserName("second");
+    middle.setUserID("second");
     middle.setTypeByTypeName("Private");
     middle.setTaskName("middleTask");
     middle.setTaskDescription("this is middleTask");
     middle.setPriorityByLavel("Middle");
-    middle.setDeadline(LocalDate.parse("2025-02-02"));
+    middle.setDueDate(LocalDate.parse("2025-02-02"));
     middle.setIsCompleted(true);
 
     list.add(middle);
 
     low.setId(3);
-    low.setUserName("third");
+    low.setUserID("third");
     low.setTypeByTypeName("Other");
     low.setTaskName("lowTask");
     low.setTaskDescription("this is lowTask");
     low.setPriorityByLavel("Low");
-    low.setDeadline(LocalDate.parse("2025-03-03"));
+    low.setDueDate(LocalDate.parse("2025-03-03"));
     low.setIsCompleted(false);
 
     list.add(low);
@@ -83,7 +83,7 @@ public class TaskServiceTest {
     inputForm.setTaskName("newTasks");
     inputForm.setTaskDescription("this is newTask");
     inputForm.setPriority("Middle");
-    inputForm.setDeadline("2025-04-04");
+    inputForm.setDueDate("2025-04-04");
 
     id = 0;
 

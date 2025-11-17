@@ -16,7 +16,7 @@ public class TaskInputForm {
   @NotBlank
   private String priority;
   @NotNull
-  private String deadline;
+  private String dueDate;
 
   //GetSet------------------------------------
   public int getId() {
@@ -59,12 +59,12 @@ public class TaskInputForm {
     this.priority = priority;
   }
 
-  public String getDeadline() {
-    return this.deadline;
+  public String getDueDate() {
+    return this.dueDate;
   }
 
-  public void setDeadline(String deadline) {
-    this.deadline = deadline;
+  public void setDueDate(String dueDate) {
+    this.dueDate = dueDate;
   }
 
 }
