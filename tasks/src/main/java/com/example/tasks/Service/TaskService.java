@@ -88,4 +88,19 @@ public class TaskService {
 
   }
 
+  public TaskInputForm entityToInputForm(TaskEntity entity) {
+
+    TaskInputForm form = new TaskInputForm();
+
+    form.setId(entity.getId());
+    form.setType(entity.getType().toString());
+    form.setTaskName(entity.getTaskName());
+    form.setTaskDescription(entity.getTaskDescription());
+    form.setPriority(entity.getPriority().toString());
+    form.setDueDate(entity.getDueDate().toString());
+
+    return form;
+
+  }
+
 }

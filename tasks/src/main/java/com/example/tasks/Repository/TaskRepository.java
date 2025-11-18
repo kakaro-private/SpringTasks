@@ -38,7 +38,7 @@ public class TaskRepository {
 
     pageInfo = form.getPageInfo();
     //全件数の取得
-    pageInfo.setAllCount(jdbc.queryForObject("SELECT COUNT(*) FROM task", Integer.class));
+    pageInfo.setAllCount(jdbc.queryForObject("SELECT COUNT(*) FROM task_info", Integer.class));
     //表示ページ数の計算
     pageInfo.setPageNo(pageInfo.calcPages());
 
@@ -52,7 +52,7 @@ public class TaskRepository {
         + " priority,"
         + " deadline,"
         + " is_completed"
-        + " FROM task");
+        + " FROM task_info");
 
     //Where句の生成
     String where = "";
