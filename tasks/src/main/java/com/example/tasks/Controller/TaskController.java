@@ -26,6 +26,8 @@ public class TaskController {
   @Autowired
   TaskService taskService;
 
+  String demoString;//ゴミ
+
   @GetMapping("/list")
   public String getList(Model model) {
 
